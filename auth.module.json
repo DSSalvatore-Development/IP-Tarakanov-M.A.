@@ -1,0 +1,6 @@
+{
+  "name": "Auth",
+  "entry": "auth.js",
+  "style": "auth.css",
+  "mount": "#core-content"
+}
