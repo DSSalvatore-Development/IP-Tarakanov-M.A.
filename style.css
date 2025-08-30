@@ -1,0 +1,42 @@
+:root{
+  --bg-dark:#0b0f14; --accent:#4fa0ff; --accent2:#22c55e; --muted:rgba(255,255,255,0.75);
+  --radius:16px; --frame-w:86vw; --frame-h:80vh;
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Inter",Segoe UI,Roboto,Arial;color:#e7eef8;background:linear-gradient(180deg,#05060a 0%, #0d1116 60%);display:flex;align-items:center;justify-content:center;}
+#core-frame{width:var(--frame-w);max-width:1200px;height:var(--frame-h);max-height:860px;border-radius:var(--radius);padding:16px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)), rgba(20,22,26,0.92);box-shadow:0 22px 60px rgba(2,6,23,0.85);backdrop-filter:blur(12px) saturate(120%);-webkit-backdrop-filter:blur(12px) saturate(120%);border:1px solid rgba(255,255,255,0.04);position:relative;overflow:hidden;display:flex;flex-direction:column;}
+/* subtle noise overlay */
+#core-frame::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background-image: url('assets/textures/noise.png');opacity:0.06;mix-blend-mode:overlay}
+
+/* header area */
+.core-header{height:56px;display:flex;align-items:center;justify-content:flex-end;padding:0 12px;border-bottom:1px solid rgba(255,255,255,0.02);z-index:5}
+.core-controls{display:flex;align-items:center;gap:10px}
+
+/* theme toggle */
+#theme-toggle{width:46px;height:26px;border-radius:13px;background:rgba(255,255,255,0.03);position:relative;cursor:pointer;border:1px solid rgba(255,255,255,0.03);display:flex;align-items:center;padding:3px}
+#theme-knob{width:20px;height:20px;border-radius:50%;background:linear-gradient(180deg,#fff,#dcdcdc);box-shadow:0 2px 6px rgba(0,0,0,0.4);transition:transform .18s ease;transform:translateX(0)}
+
+/* content */
+#core-content{flex:1;display:flex;align-items:center;justify-content:center;padding:18px;overflow:auto}
+.center-placeholder{display:none}
+
+/* notifications bottom-right */
+.core-notifications{position:fixed;right:18px;bottom:18px;display:flex;flex-direction:column;gap:10px;z-index:99999;max-width:320px}
+.core-notice{padding:10px 14px;border-radius:10px;color:#fff;font-size:13px;box-shadow:0 8px 24px rgba(0,0,0,0.5);cursor:pointer}
+.notice-info{background:linear-gradient(90deg,var(--accent),#2eb0ff)}.notice-success{background:linear-gradient(90deg,var(--accent2),#2eb077)}.notice-error{background:#d9534f}
+
+/* module slot - transparent so module elements look integrated */
+.module-slot{background:transparent;border-radius:10px;padding:0;box-shadow:none;border:none;color:inherit;display:flex;align-items:center;justify-content:center;width:100%}
+
+/* auth: inputs appear as cutouts in monolith */
+.auth-form{width:420px;max-width:92%;display:flex;flex-direction:column;gap:12px;padding:0;text-align:left}
+.auth-input{width:100%;padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.06);background:linear-gradient(180deg, rgba(0,0,0,0.18), rgba(255,255,255,0.02));color:inherit;outline:none}
+.auth-btn{padding:11px 14px;border-radius:10px;border:none;background:var(--accent);color:#041022;font-weight:700;cursor:pointer}
+.auth-hint{display:none}
+
+/* light theme */
+.light html, .light body{background:linear-gradient(180deg,#f6f8fb,#e9eef6);color:#0b1220}
+.light #core-frame{background:linear-gradient(180deg, rgba(0,0,0,0.02), rgba(255,255,255,0.97));border:1px solid rgba(0,0,0,0.06)}
+.light .auth-input{background:linear-gradient(180deg, #fff, #f4f6fa);border:1px solid rgba(0,0,0,0.06);color:#0b1220}
+.light #theme-knob{transform:translateX(20px);background:linear-gradient(180deg,#0b8bff,#0574ff)}
+@media (max-width:900px){#core-frame{width:94vw;height:86vh;padding:12px}}
