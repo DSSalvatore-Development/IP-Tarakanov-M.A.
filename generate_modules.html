@@ -1,0 +1,28 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Генератор modules.json</title></head><body style="font-family:Arial;padding:18px;background:#111;color:#fff">
+<h2>Генератор modules.json</h2>
+<p>Выбери папку modules с помощью поля ниже (можно перетащить). Инструмент просканирует подпапки и сформирует modules.json.</p>
+<input id="dir" type="file" webkitdirectory directory multiple>
+<button id="scan">Сканировать</button>
+<pre id="out"></pre>
+<script>
+document.getElementById('scan').addEventListener('click', ()=>{
+  const files = document.getElementById('dir').files;
+  if(!files || files.length===0){ alert('Выберите папку modules'); return; }
+  const groups = {};
+  for(const f of files){
+    const p = f.webkitRelativePath.split('/');
+    if(p.length<2) continue;
+    const top = p[0];
+    groups[top]=groups[top]||new Set();
+    groups[top].add(p.slice(1).join('/'));
+  }
+  const mods=[];
+  for(const k of Object.keys(groups)){
+    mods.push('modules/'+k);
+  }
+  const out = JSON.stringify(mods,null,2);
+  document.getElementById('out').textContent = out;
+  const blob = new Blob([out],{type:'application/json'});
+  const a = document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='modules.json'; a.textContent='Скачать modules.json'; document.body.appendChild(a);
+});
+</script></body></html>
