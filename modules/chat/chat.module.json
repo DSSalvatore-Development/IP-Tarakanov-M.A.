@@ -1,6 +1,0 @@
-{
-    "name": "Chat",
-    "entry": "chat.js",
-    "style": "chat.css",
-    "mount": "#core-frame"
-}
