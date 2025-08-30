@@ -1,0 +1,1 @@
+(function(){const L={};function on(n,f){(L[n]=L[n]||[]).push(f);return ()=>off(n,f);}function off(n,f){if(!L[n])return;L[n]=L[n].filter(x=>x!==f);}function emit(n,d){(L[n]||[]).forEach(f=>{try{f(d)}catch(e){console.error(e)}});}window.CoreEvents={on,off,emit};})();
